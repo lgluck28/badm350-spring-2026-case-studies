@@ -1,8 +1,8 @@
-# Team Connect My Tribe — Waitlist Teaser Campaign
+# Team Connect My Tribe — User Feedback Analyzer
 
 **Project:** [Connect My Tribe](https://connect-my-tribe-95.lovable.app/) — a Chicago-focused community app that helps people discover events, find shared-interest groups, and make real in-person connections.
 **Built by:** Lindsay Gluck
-**Automation type:** Marketing
+**Automation type:** Operations
 
 ---
 
@@ -12,37 +12,30 @@ Connect My Tribe is a Chicago-first community app designed to help people discov
 
 ## Automation
 
-I used Codex to build a pre-launch marketing workflow for Connect My Tribe instead of just one asset. The automation produced a landing page that acts as a front door into the live app, an email reminder signup flow, a teaser content hub, a 5-post content calendar, a confirmation email template, a nurture sequence, and a launch checklist so I could turn product positioning into something I could actually share.
+I used Codex to build an internal feedback-analysis workflow for Connect My Tribe after user testing. Instead of changing the live app directly, the automation took raw tester observations and converted them into an executive summary, a categorized analysis of issues, a prioritized backlog, and a recommended build order for the team.
 
-The clearest proof of work is the landing page preview in my Module 3 folder. That page explains the product, routes users into the live app, and includes a reminder form that saves submissions locally now and is ready to post the same payload to a real webhook later.
+This helped turn messy feedback into concrete operating decisions. The output highlighted that the most urgent issue before launch was hiding admin controls from non-admin users, followed by fixing the profile-name bug and reducing choice overload in event and group discovery.
 
 ## Prompt used
 
 This is the final working instruction set reflected in the saved files from my Module 3 workflow:
 
 ```text
-Create a launch-ready waitlist teaser campaign for Connect My Tribe, a Chicago-focused app that helps people discover local events, meet others with shared interests, and build real in-person community.
+Analyze Connect My Tribe user-testing feedback from our pre-launch testers.
 
-Build a clean landing page that:
-- explains what the product does and who it is for
-- gives users a simple path into the live app
-- includes primary and secondary calls to action for sign in and account creation
-- adds trust signals and short sections for the problem, solution, how it works, and differentiation
-- also includes an email reminder signup form for people who are interested but not ready to enter the app yet
+Take the raw feedback and produce:
+- an executive summary of what is working and what is highest risk
+- a categorized feedback analysis by tester, issue type, and severity
+- a prioritized action plan with P0, P1, and P2 items
+- a backlog table the team can use to plan implementation
 
-Also create:
-- a 5-post teaser content calendar for Instagram, LinkedIn, and X
-- a waitlist confirmation email
-- a short nurture email sequence
-- a simple launch checklist
-
-Keep the tone practical and launch-oriented, optimized for real users in Chicago. Make the reminder form demo-ready with local storage and make it easy to swap in a real webhook endpoint later.
+Focus on what matters most before launch. Separate praise, bugs, privacy or access-control issues, UX friction, and feature requests. Make the output useful for product and engineering decisions, not just a summary of comments.
 ```
 
 ## Inner / outer loop
 
-- **Inner loop (AI execution):** Codex generated the landing page structure and copy, built the reminder form behavior, created the content calendar, drafted the confirmation email and nurture sequence, and assembled the launch checklist and supporting campaign assets.
-- **Outer loop (human judgment):** I decided the product positioning, checked whether the copy actually matched Connect My Tribe, reviewed the CTA flow into the live app, and determined what still needed to be connected manually before this could be used in a real campaign.
+- **Inner loop (AI execution):** Codex organized the tester feedback, classified each comment by category and severity, identified repeated themes, and turned the notes into an executive summary, a prioritized action plan, and a structured backlog.
+- **Outer loop (human judgment):** I had to judge whether the prioritization actually matched our launch risk, decide which issues were truly blocking, and choose what the team should fix first given time and product goals.
 
 ## Anthropic agent pattern
 
@@ -54,19 +47,19 @@ Which of these fits best? Pick one and defend in 1-2 sentences.
 - [ ] Orchestrator-worker
 - [ ] Evaluator-optimizer
 
-**Why this one:** The work happened as a sequence of connected outputs: first a landing-page brief and positioning, then the landing page itself, then supporting campaign assets like reminder signup logic, content posts, emails, and a launch checklist. Each artifact depended on the messaging decisions established in the earlier step.
+**Why this one:** The workflow moved from raw input to progressively more decision-ready outputs: tester observations became a categorized analysis, then an executive summary, then a prioritized action plan and backlog. Each stage depended on the structure created in the previous one.
 
 ## What required human judgment
 
-The automation was not fully autonomous because I still had to judge whether the messaging fit the actual product and whether the calls to action reflected the real app flow. I also had to decide what counts as a credible trust signal, whether the Chicago-first positioning was strong enough, and how the page should connect to production tools like sign-in routes and an email platform.
+The automation was not fully autonomous because I still had to judge product risk, especially around trust and privacy. For example, Codex correctly surfaced admin visibility as critical, but I had to decide whether that issue was truly launch-blocking, whether the profile-name bug was a data issue or a UI-sync issue, and how much weight to give feature requests like an RSVPd-events tab compared with privacy and usability problems.
 
-If I had let Codex run end-to-end without checking it, I could have ended up with polished but inaccurate product copy, incorrect auth links, or a reminder flow that looked finished even though it was only saving submissions locally in the browser.
+If I had let Codex run end-to-end without checking it, I could have ended up with a neat-looking plan that over- or under-prioritized the wrong issues. The human role was deciding what actually threatens launch readiness versus what can wait.
 
 ## What didn't work
 
-The first limitation was that the landing page did not have the app's exact sign-in and sign-up route paths available in the workspace, so the CTAs point to the live app root instead of separate auth screens. The second limitation was that the reminder signup flow is only partially production-ready: it stores submissions in browser local storage and still needs a real webhook or backend endpoint connected.
+The biggest limitation is that the automation only works as well as the quality of the raw feedback. We only had three testers, so patterns were useful but still based on a small sample. That means the analysis was helpful for prioritization, but not enough to treat every recommendation as universally true.
 
-More broadly, the automation was strong at packaging and copy generation, but it still needed manual review to avoid overclaiming traction or assuming too much about user behavior. The output looked polished quickly, but the human work was in deciding what was actually true, what was technically connected, and what still needed to be implemented before launch.
+Another limitation is that Codex can classify and summarize issues well, but it cannot fully infer technical root cause from user comments alone. The analysis could tell us that admin visibility was a critical trust issue, but not whether the fix belonged in frontend rendering, auth rules, or backend permissions without additional inspection from us.
 
 ---
 
